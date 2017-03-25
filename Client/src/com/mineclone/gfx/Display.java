@@ -22,7 +22,7 @@ public class Display {
 	
 	private static GLFWFramebufferSizeCallback framebufferSizeCallback;
 	
-	public static boolean initialize(int width, int height, String title) {
+	public static boolean init(int width, int height, String title) {
 		if(window != NULL) return false;
 		if(glfwInit() != GL_TRUE) {
 			return false; //TODO: Set some error code.
