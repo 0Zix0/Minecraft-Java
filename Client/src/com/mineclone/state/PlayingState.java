@@ -20,24 +20,25 @@ public class PlayingState extends GameState {
 			 0.5f,  0.5f,
 			-0.5f,  0.5f,
 			-0.5f, -0.5f,
-			-0.5f, -0.5f,
-			 0.5f, -0.5f,
-			 0.5f,  0.5f
+			 0.5f, -0.5f
 	};
 	
 	private float[] textureCoordinates = new float[] {
 			1, 1,
 			0, 1,
 			0, 0,
-			0, 0,
-			1, 0,
-			1, 1
+			1, 0
+	};
+	
+	private int[] indices = new int[] {
+			0, 1, 2,
+			2, 3, 0
 	};
 	
 	public PlayingState(Application application) {
 		super(application);
 		
-		model = new Model(vertices, textureCoordinates);
+		model = new Model(vertices, textureCoordinates, indices);
 		texture = new BasicTexture("res/textures/texture.png");
 		shader = new SimpleShader();
 	}
@@ -56,6 +57,7 @@ public class PlayingState extends GameState {
 		texture.bind();
 		
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, model.getIndicesCount(), GL_UNSIGNED_INT, 0);
 		
 		texture.unbind();
 		model.unbind();

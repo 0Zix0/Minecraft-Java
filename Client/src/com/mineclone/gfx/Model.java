@@ -18,14 +18,17 @@ public class Model {
 	private ArrayList<Integer> buffers = new ArrayList<Integer>();
 	private int vboCount = 0;
 	private int vao;
+	private int indicesCount;
 	
-	public Model(float[] vertexPositions, float[] textureCoordinates) {
+	public Model(float[] vertexPositions, float[] textureCoordinates, int[] indices) {
+		indicesCount = indices.length;
 		vao = glGenVertexArrays();
 		
 		glBindVertexArray(vao);
 		
 		addVBO(2, vertexPositions);
 		addVBO(2, textureCoordinates);
+		addEBO(indices);
 		
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -43,12 +46,23 @@ public class Model {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	
+	public void addEBO(int[] indices) {
+		int ebo = glGenBuffers();
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, BufferUtilities.createIntBuffer(indices), GL_STATIC_DRAW);
+		buffers.add(ebo);
+	}
+	
 	public void bind() {
 		glBindVertexArray(vao);
 	}
 	
 	public void unbind() {
 		glBindVertexArray(0);
+	}
+	
+	public int getIndicesCount() {
+		return indicesCount;
 	}
 	
 	public void delete() {

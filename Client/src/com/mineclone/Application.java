@@ -31,6 +31,6 @@ public class Application {
 	}
 	
 	public void popState() {
-		
+		states.pop();
 	}
 }
