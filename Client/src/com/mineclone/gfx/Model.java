@@ -11,18 +11,21 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 
+import com.mineclone.util.BufferUtilities;
+
 public class Model {
 
 	private ArrayList<Integer> buffers = new ArrayList<Integer>();
 	private int vboCount = 0;
 	private int vao;
 	
-	public Model(float[] vertexPositions) {
+	public Model(float[] vertexPositions, float[] textureCoordinates) {
 		vao = glGenVertexArrays();
 		
 		glBindVertexArray(vao);
 		
 		addVBO(2, vertexPositions);
+		addVBO(2, textureCoordinates);
 		
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -32,7 +35,7 @@ public class Model {
 		int vbo = glGenBuffers();
 		
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, createFloatBuffer(data), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, BufferUtilities.createFloatBuffer(data), GL_STATIC_DRAW);
 		glVertexAttribPointer(vboCount, dim, GL_FLOAT, false, 0, 0);
 		glEnableVertexAttribArray(vboCount);
 		vboCount++;
@@ -55,11 +58,5 @@ public class Model {
 		buffers.forEach((Integer i) -> {
 			glDeleteBuffers(i);
 		});
-	}
-	
-	private static FloatBuffer createFloatBuffer(float[] array) {
-		FloatBuffer result = ByteBuffer.allocateDirect(array.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
-		result.put(array).flip();
-		return result;
 	}
 }
