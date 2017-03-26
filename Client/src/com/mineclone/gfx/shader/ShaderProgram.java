@@ -3,7 +3,13 @@ package com.mineclone.gfx.shader;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
+import java.nio.FloatBuffer;
+
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.lwjgl.BufferUtils;
+
+import com.mineclone.util.BufferUtilities;
 
 public abstract class ShaderProgram {
 
@@ -29,6 +35,12 @@ public abstract class ShaderProgram {
 	
 	public void loadVector2f(int location, Vector2f vector) {
 		glUniform2f(location, vector.x, vector.y);
+	}
+	
+	public void loadMatrix4f(int location, Matrix4f matrix) {
+		FloatBuffer fb = BufferUtils.createFloatBuffer(16);
+		matrix.get(fb);
+		glUniformMatrix4fv(location, false, fb);
 	}
 	
 	public void bind() {

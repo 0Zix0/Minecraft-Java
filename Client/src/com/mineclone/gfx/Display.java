@@ -53,6 +53,9 @@ public class Display {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		
+		Display.width = width;
+		Display.height = height;
+		
 		return true;
 	}
 	
@@ -67,5 +70,13 @@ public class Display {
 	public static void update() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+	}
+	
+	public static int getWidth() {
+		return width;
+	}
+	
+	public static int getHeight() {
+		return height;
 	}
 }

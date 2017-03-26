@@ -1,5 +1,6 @@
 package com.mineclone.gfx.renderer;
 
+import com.mineclone.entity.Entity;
 import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Display;
 
@@ -15,8 +16,8 @@ public class MasterRenderer {
 		Display.clear();
 	}
 	
-	public void update() {
-		simpleRenderer.update();
+	public void update(Entity camera) {
+		simpleRenderer.update(camera);
 		Display.update();
 	}
 	

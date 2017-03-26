@@ -1,6 +1,7 @@
 package com.mineclone.state;
 
 import com.mineclone.Application;
+import com.mineclone.entity.Entity;
 import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Model;
 import com.mineclone.gfx.renderer.MasterRenderer;
@@ -25,13 +26,15 @@ public class PlayingState extends GameState {
 		
 		texture = new BasicTexture("res/textures/texture.png");
 		texture.bind();
+		
+		quad.getPosition().z = -3;
 	}
 
-	public void input() {
+	public void input(Entity camera) {
 		
 	}
 
-	public void update() {
+	public void update(Entity camera) {
 		quad.getPosition().x = (float) Math.sin(GLFW.glfwGetTime());
 	}
 

@@ -26,7 +26,7 @@ public class Model {
 		
 		glBindVertexArray(vao);
 		
-		addVBO(2, vertexPositions);
+		addVBO(3, vertexPositions);
 		addVBO(2, textureCoordinates);
 		addEBO(indices);
 		

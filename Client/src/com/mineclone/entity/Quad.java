@@ -7,10 +7,10 @@ public class Quad extends Entity {
 	private Model model;
 	
 	private float[] vertices = new float[] {
-			 0.5f,  0.5f,
-			-0.5f,  0.5f,
-			-0.5f, -0.5f,
-			 0.5f, -0.5f
+			 0.5f,  0.5f, 0,
+			-0.5f,  0.5f, 0,
+			-0.5f, -0.5f, 0,
+			 0.5f, -0.5f, 0
 	};
 	
 	private float[] textureCoordinates = new float[] {
