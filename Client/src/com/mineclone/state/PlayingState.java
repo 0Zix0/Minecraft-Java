@@ -9,6 +9,8 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 
+import org.lwjgl.glfw.GLFW;
+
 public class PlayingState extends GameState {
 
 	private Model model;
@@ -53,10 +55,10 @@ public class PlayingState extends GameState {
 
 	public void draw() {
 		shader.bind();
+		shader.setTime((float)GLFW.glfwGetTime());
 		model.bind();
 		texture.bind();
 		
-		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glDrawElements(GL_TRIANGLES, model.getIndicesCount(), GL_UNSIGNED_INT, 0);
 		
 		texture.unbind();

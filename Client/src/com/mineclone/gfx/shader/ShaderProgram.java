@@ -11,10 +11,18 @@ public abstract class ShaderProgram {
 		programID = ShaderLoader.loadShader(vertexFile, fragmentFile);
 	}
 	
-	public abstract void bindAttributes();
+	public abstract void getUniformLocations();
+	
+	public int getID() {
+		return programID;
+	}
 	
 	public void bindAttribute(int location, String name) {
 		glBindAttribLocation(programID, location, name);
+	}
+	
+	public void loadFloat(int location, float value) {
+		glUniform1f(location, value);
 	}
 	
 	public void bind() {
