@@ -8,12 +8,13 @@ import java.util.Vector;
 
 import org.lwjgl.glfw.GLFW;
 
+import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Model;
 import com.mineclone.gfx.shader.SimpleShader;
 
 public class SimpleRenderer {
 
-	private Vector<Model> models = new Vector<>();
+	private Vector<Quad> quads = new Vector<>();
 	
 	private SimpleShader shader;
 	
@@ -21,22 +22,23 @@ public class SimpleRenderer {
 		shader = new SimpleShader();
 	}
 	
-	public void draw(Model model) {
-		models.add(model);
+	public void draw(Quad quad) {
+		quads.add(quad);
 	}
 	
 	public void update() {
 		shader.bind();
 		shader.setTime((float)GLFW.glfwGetTime());
-		models.forEach((Model model) -> {
-			prepare(model);
-			glDrawElements(GL_TRIANGLES, model.getIndicesCount(), GL_UNSIGNED_INT, 0);
+		quads.forEach((Quad quad) -> {
+			prepare(quad);
+			glDrawElements(GL_TRIANGLES, quad.getModel().getIndicesCount(), GL_UNSIGNED_INT, 0);
 		});
 		
-		models.clear();
+		quads.clear();
 	}
 	
-	private void prepare(Model model) {
-		model.bind();
+	private void prepare(Quad quad) {
+		quad.getModel().bind();
+		shader.setPosition(quad.getPosition());
 	}
 }

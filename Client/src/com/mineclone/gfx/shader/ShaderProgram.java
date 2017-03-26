@@ -3,6 +3,8 @@ package com.mineclone.gfx.shader;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
+import org.joml.Vector2f;
+
 public abstract class ShaderProgram {
 
 	private int programID;
@@ -23,6 +25,10 @@ public abstract class ShaderProgram {
 	
 	public void loadFloat(int location, float value) {
 		glUniform1f(location, value);
+	}
+	
+	public void loadVector2f(int location, Vector2f vector) {
+		glUniform2f(location, vector.x, vector.y);
 	}
 	
 	public void bind() {

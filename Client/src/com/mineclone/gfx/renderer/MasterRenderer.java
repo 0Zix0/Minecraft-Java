@@ -1,7 +1,7 @@
 package com.mineclone.gfx.renderer;
 
+import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Display;
-import com.mineclone.gfx.Model;
 
 public class MasterRenderer {
 
@@ -20,7 +20,7 @@ public class MasterRenderer {
 		Display.update();
 	}
 	
-	public void draw(Model model) {
+	public void draw(Quad model) {
 		simpleRenderer.draw(model);
 	}
 }
