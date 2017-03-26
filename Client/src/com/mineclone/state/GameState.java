@@ -1,6 +1,7 @@
 package com.mineclone.state;
 
 import com.mineclone.Application;
+import com.mineclone.gfx.renderer.MasterRenderer;
 
 public abstract class GameState {
 
@@ -12,5 +13,5 @@ public abstract class GameState {
 	
 	public abstract void input();
 	public abstract void update();
-	public abstract void draw();
+	public abstract void draw(MasterRenderer renderer);
 }

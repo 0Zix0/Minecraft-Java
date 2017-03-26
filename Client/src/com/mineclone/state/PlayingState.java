@@ -2,6 +2,7 @@ package com.mineclone.state;
 
 import com.mineclone.Application;
 import com.mineclone.gfx.Model;
+import com.mineclone.gfx.renderer.MasterRenderer;
 import com.mineclone.gfx.shader.SimpleShader;
 import com.mineclone.gfx.texture.BasicTexture;
 
@@ -15,8 +16,6 @@ public class PlayingState extends GameState {
 
 	private Model model;
 	private BasicTexture texture;
-	
-	private SimpleShader shader;
 	
 	private float[] vertices = new float[] {
 			 0.5f,  0.5f,
@@ -42,7 +41,7 @@ public class PlayingState extends GameState {
 		
 		model = new Model(vertices, textureCoordinates, indices);
 		texture = new BasicTexture("res/textures/texture.png");
-		shader = new SimpleShader();
+		texture.bind();
 	}
 
 	public void input() {
@@ -53,16 +52,7 @@ public class PlayingState extends GameState {
 		
 	}
 
-	public void draw() {
-		shader.bind();
-		shader.setTime((float)GLFW.glfwGetTime());
-		model.bind();
-		texture.bind();
-		
-		glDrawElements(GL_TRIANGLES, model.getIndicesCount(), GL_UNSIGNED_INT, 0);
-		
-		texture.unbind();
-		model.unbind();
-		shader.unbind();
+	public void draw(MasterRenderer renderer) {
+		renderer.draw(model);
 	}
 }
