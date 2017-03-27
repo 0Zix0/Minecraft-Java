@@ -1,17 +1,7 @@
 package com.mineclone.gfx;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glViewport;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
@@ -55,13 +45,13 @@ public class Display {
 		glfwSetKeyCallback(window, keyCallback = new Input.Keyboard());
 		glfwSetMouseButtonCallback(window, mouseButtonCallback = new Input.MouseButton());
 		glfwSetCursorPosCallback(window, cursorPosCallback = new Input.MousePosition());
-		glfwSetFramebufferSizeCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
-			public void invoke(long window, int width, int height) {
-				Display.width = width;
-				Display.height = height;
-				glViewport(0, 0, width, height);
-			}
-		});
+		//glfwSetFramebufferSizeCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
+		//	public void invoke(long window, int width, int height) {
+		//		Display.width = width;
+		//		Display.height = height;
+		//		glViewport(0, 0, width, height);
+		//	}
+		//});
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwMakeContextCurrent(window);
@@ -72,6 +62,8 @@ public class Display {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		glEnable(GL_DEPTH_TEST);
 		
 		Display.width = width;
 		Display.height = height;

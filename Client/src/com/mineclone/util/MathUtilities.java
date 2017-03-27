@@ -30,7 +30,7 @@ public class MathUtilities {
 	}
 	
 	public static Matrix4f createProjMatrix() {
-		Matrix4f res = new Matrix4f().perspective((float)Math.toRadians(90.0f), (float) (Display.getWidth() / Display.getHeight()), 0.1f, 1000.0f);
+		Matrix4f res = new Matrix4f().perspective((float)Math.toRadians(90.0f), (float) Display.getWidth() / (float) Display.getHeight(), 0.1f, 1000.0f);
 		return res;
 	}
 }
