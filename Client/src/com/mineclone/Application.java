@@ -2,7 +2,9 @@ package com.mineclone;
 
 import java.util.Stack;
 
-import com.mineclone.entity.Entity;
+import org.lwjgl.glfw.GLFW;
+
+import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.Display;
 import com.mineclone.gfx.renderer.MasterRenderer;
 import com.mineclone.state.GameState;
@@ -13,8 +15,7 @@ public class Application {
 	private Stack<GameState> states = new Stack<GameState>();;
 	
 	private MasterRenderer renderer;
-	private Entity camera = new Entity() {
-	};
+	private Camera camera = new Camera();
 	
 	public Application() {
 		renderer = new MasterRenderer();
@@ -22,14 +23,17 @@ public class Application {
 	}
 	
 	public void gameLoop() {
+		double lastTime = GLFW.glfwGetTime();
 		while(!Display.shouldClose()) {
+			double now = GLFW.glfwGetTime();
 			renderer.clear();
 
 			states.peek().input(camera);
-			states.peek().update(camera);
+			states.peek().update(camera, (float) lastTime);
 			states.peek().draw(renderer);
 			
 			renderer.update(camera);
+			lastTime = GLFW.glfwGetTime() - now;
 		}
 	}
 	

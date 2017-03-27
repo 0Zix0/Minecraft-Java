@@ -2,6 +2,7 @@ package com.mineclone.gfx.renderer;
 
 import com.mineclone.entity.Entity;
 import com.mineclone.entity.Quad;
+import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.Display;
 
 public class MasterRenderer {
@@ -16,7 +17,7 @@ public class MasterRenderer {
 		Display.clear();
 	}
 	
-	public void update(Entity camera) {
+	public void update(Camera camera) {
 		simpleRenderer.update(camera);
 		Display.update();
 	}

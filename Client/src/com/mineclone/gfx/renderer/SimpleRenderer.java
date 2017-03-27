@@ -1,14 +1,15 @@
 package com.mineclone.gfx.renderer;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
+import static org.lwjgl.opengl.GL11.glDrawElements;
 
 import java.util.Vector;
 
 import org.lwjgl.glfw.GLFW;
 
-import com.mineclone.entity.Entity;
 import com.mineclone.entity.Quad;
-import com.mineclone.gfx.Model;
+import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.shader.SimpleShader;
 import com.mineclone.util.MathUtilities;
 
@@ -26,7 +27,7 @@ public class SimpleRenderer {
 		quads.add(quad);
 	}
 	
-	public void update(Entity camera) {
+	public void update(Camera camera) {
 		shader.bind();
 		shader.setTime((float)GLFW.glfwGetTime());
 		
@@ -38,6 +39,7 @@ public class SimpleRenderer {
 		});
 		
 		quads.clear();
+		shader.unbind();
 	}
 	
 	private void prepare(Quad quad) {
