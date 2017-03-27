@@ -7,19 +7,20 @@ import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.renderer.MasterRenderer;
 import com.mineclone.gfx.texture.BasicTexture;
+import com.mineclone.gfx.texture.TextureAtlas;
 
 public class PlayingState extends GameState {
 
 	private Quad quad;
-	private BasicTexture texture;
+	private TextureAtlas texture;
 	
 	public PlayingState(Application application) {
 		super(application);
 		
-		quad = new Quad();
-		
-		texture = new BasicTexture("res/textures/texture.png");
+		texture = new TextureAtlas("res/textures/atlas1.png", 16);
 		texture.bind();
+		
+		quad = new Quad(texture);
 		
 		quad.getPosition().z = -3;
 	}

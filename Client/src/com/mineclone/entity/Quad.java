@@ -1,6 +1,9 @@
 package com.mineclone.entity;
 
+import java.util.ArrayList;
+
 import com.mineclone.gfx.Model;
+import com.mineclone.gfx.texture.TextureAtlas;
 
 public class Quad extends Entity {
 
@@ -43,38 +46,6 @@ public class Quad extends Entity {
 		    0, 0, 1
 	};
 	
-	private float[] textureCoordinates = new float[] {
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-		 
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-		 
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-		 
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-		 
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-		 
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
-		    0.0f, 0.0f,
-		    1.0f, 0.0f,
-	};
-	
 	private int[] indices = new int[] {
 		    0, 1, 2,
 		    2, 3, 0,
@@ -95,8 +66,22 @@ public class Quad extends Entity {
 		    22, 23, 20
 	};
 	
-	public Quad() {
-		model = new Model(vertices, textureCoordinates, indices);
+	public Quad(TextureAtlas atlas) {
+		ArrayList<Float> coords = new ArrayList<>();
+		coords.addAll(atlas.getTextureCoords(1, 0));
+		coords.addAll(atlas.getTextureCoords(1, 0));
+		coords.addAll(atlas.getTextureCoords(1, 0));
+		coords.addAll(atlas.getTextureCoords(1, 0));
+
+		coords.addAll(atlas.getTextureCoords(0, 0));
+		
+		coords.addAll(atlas.getTextureCoords(2, 0));
+		Float[] fa = (Float[]) coords.toArray(new Float[coords.size()]);
+		float[] fin = new float[fa.length];
+		for(int i = 0; i < fin.length; i++) {
+			fin[i] = fa[i];
+		}
+		model = new Model(vertices, fin, indices);
 	}
 	
 	public Model getModel() {

@@ -13,7 +13,9 @@ import static org.lwjgl.opengl.GL12.*;
 
 public class BasicTexture {
 
-	private int textureID;
+	protected int textureID;
+	protected int width;
+	protected int height;
 	
 	public BasicTexture(String path) {
 		load(path);
@@ -22,8 +24,8 @@ public class BasicTexture {
 	private void load(String file) {
 		try {
 			BufferedImage image = ImageIO.read(new FileInputStream(file));
-			int width = image.getWidth();
-			int height = image.getHeight();
+			width = image.getWidth();
+			height = image.getHeight();
 			int[] pixels = new int[width * height];
 			image.getRGB(0, 0, width, height, pixels, 0, width);
 			

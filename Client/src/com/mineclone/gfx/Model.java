@@ -53,6 +53,22 @@ public class Model {
 		buffers.add(ebo);
 	}
 	
+	public void addData(float[] vertexPositions, float[] textureCoordinates, int[] indices) {
+		delete();
+		
+		indicesCount = indices.length;
+		vao = glGenVertexArrays();
+		
+		glBindVertexArray(vao);
+		
+		addVBO(3, vertexPositions);
+		addVBO(2, textureCoordinates);
+		addEBO(indices);
+		
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
 	public void bind() {
 		glBindVertexArray(vao);
 	}
