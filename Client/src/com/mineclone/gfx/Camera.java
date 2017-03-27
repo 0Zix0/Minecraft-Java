@@ -42,23 +42,20 @@ public class Camera extends Entity {
 		Vector2f mouseChange = currentMousePos.sub(lastMousePosition);
 		rotation.y += mouseChange.x;
 		rotation.x += mouseChange.y;
-
-		if(rotation.x > 80) {
+		
+		if (rotation.x > 80) {
 			rotation.x = 80;
-		} else if(rotation.x < -80) {
+		} else if (rotation.x == -80) {
 			rotation.x = -80;
 		}
-		
-		if(rotation.y < 0) {
+
+		if (rotation.y < 0) {
 			rotation.y = 360;
-		} else if(rotation.y > 360) {
+		} else if (rotation.y > 360) {
 			rotation.y = 0;
 		}
-		
-		float centerX = Display.getWidth() / 2;
-		float centerY = Display.getHeight() / 2;
-		
-		//Display.setCursorPos(centerX, centerY);
+
+		rotation.z = 0;
 		
 		lastMousePosition = Input.getMousePos();
 	}
