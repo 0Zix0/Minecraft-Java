@@ -1,0 +1,17 @@
+Name
+Grass
+
+ID
+1
+
+Opaque
+True
+
+TextureTop
+0 0
+
+TextureSide
+1 0
+
+TextureBottom
+2 0
