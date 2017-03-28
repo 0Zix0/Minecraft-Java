@@ -20,10 +20,6 @@ public class SimpleShader extends ShaderProgram {
 	public SimpleShader() {
 		super("res/shaders/simple.vert", "res/shaders/simple.frag");
 		getUniformLocations();
-		
-		bind();
-		loadMatrix4f(locationProjMatrix, projectionMatrix);
-		unbind();
 	}
 
 	public void getUniformLocations() {

@@ -10,6 +10,7 @@ import org.lwjgl.glfw.GLFW;
 
 import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Camera;
+import com.mineclone.gfx.Display;
 import com.mineclone.gfx.shader.SimpleShader;
 import com.mineclone.util.MathUtilities;
 
@@ -28,10 +29,14 @@ public class SimpleRenderer {
 	}
 	
 	public void update(Camera camera) {
+		Display.recalculateProjection(camera);
+		camera.update();
+		
 		shader.bind();
 		shader.setTime((float)GLFW.glfwGetTime());
 		
-		shader.setViewMatrix(MathUtilities.createViewMatrix(camera));
+		shader.setViewMatrix(camera.getViewMatrix());
+		shader.setProjMatrix(camera.getProjectionMatrix());
 		
 		quads.forEach((Quad quad) -> {
 			prepare(quad);

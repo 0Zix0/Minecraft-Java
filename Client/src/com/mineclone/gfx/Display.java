@@ -22,11 +22,12 @@ public class Display {
 	private static long window = NULL;
 	
 	private static GLFWFramebufferSizeCallback framebufferSizeCallback;
-	
 
 	private static GLFWKeyCallback keyCallback;
 	private static GLFWMouseButtonCallback mouseButtonCallback;
 	private static GLFWCursorPosCallback cursorPosCallback;
+	
+	private static boolean recalculateProjection = false;
 	
 	public static boolean init(int width, int height, String title) {
 		if(window != NULL) return false;
@@ -45,13 +46,14 @@ public class Display {
 		glfwSetKeyCallback(window, keyCallback = new Input.Keyboard());
 		glfwSetMouseButtonCallback(window, mouseButtonCallback = new Input.MouseButton());
 		glfwSetCursorPosCallback(window, cursorPosCallback = new Input.MousePosition());
-		//glfwSetFramebufferSizeCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
-		//	public void invoke(long window, int width, int height) {
-		//		Display.width = width;
-		//		Display.height = height;
-		//		glViewport(0, 0, width, height);
-		//	}
-		//});
+		glfwSetFramebufferSizeCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
+			public void invoke(long window, int width, int height) {
+				Display.width = width;
+				Display.height = height;
+				glViewport(0, 0, width, height);
+				recalculateProjection = true;
+			}
+		});
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwMakeContextCurrent(window);
@@ -94,5 +96,10 @@ public class Display {
 	
 	public static int getHeight() {
 		return height;
+	}
+	
+	public static void recalculateProjection(Camera camera) {
+		if(recalculateProjection) camera.recalculateProjectionMatrix();
+		recalculateProjection = false;
 	}
 }
