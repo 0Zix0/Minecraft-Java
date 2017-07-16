@@ -14,31 +14,39 @@ public enum Block {
 	AIR(0, "res/blocks/air.blk"),
 	GRASS(1, "res/blocks/grass.blk");
 
-	private static HashMap<Integer, Block> blocks = new HashMap<>();
+	private static HashMap<Byte, Block> blocks = new HashMap<>();
 	
-	private int id;
+	private byte id;
 	private String dataFile;
-	
-	private String name;
-	private boolean isOpaque;
-	private Vector2i topTextureCoords;
-	private Vector2i sideTextureCoords;
-	private Vector2i bottomTextureCoords;
+	private BlockData blockData;
 	
 	private Block(int id, String dataFile) {
-		this.id = id;
+		this.id = (byte)id;
 		this.dataFile = dataFile;
 		loadData();
 	}
 	
+	public byte getID() {
+		return id;
+	}
+	
+	public BlockData getData() {
+		return blockData;
+	}
+	
 	private void loadData() {
+		String name = "N/A";
+		boolean isOpaque = false;
+		Vector2i topTextureCoords = new Vector2i();
+		Vector2i sideTextureCoords = new Vector2i();
+		Vector2i bottomTextureCoords = new Vector2i();
 		try(BufferedReader br = new BufferedReader(new FileReader(new File(dataFile)))) {
 		    for(String line; (line = br.readLine()) != null; ) {
 		    	if(line.equalsIgnoreCase("") || line.isEmpty()) continue;
 		    	if(line.equalsIgnoreCase("Name")) {
 		    		name = br.readLine();
 		    	} else if(line.equalsIgnoreCase("ID")) {
-		    		id = Integer.parseInt(br.readLine());
+		    		id = Byte.parseByte(br.readLine());
 		    	} else if(line.equalsIgnoreCase("Opaque")) {
 		    		isOpaque = Boolean.parseBoolean(br.readLine());
 		    	} else if(line.equalsIgnoreCase("TextureTop")) {
@@ -55,8 +63,10 @@ public enum Block {
 		    		bottomTextureCoords = new Vector2i(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
 		    	}
 		    }
+		    blockData = new BlockData(name, isOpaque, topTextureCoords, sideTextureCoords, bottomTextureCoords);
 		} catch(IOException e) {
-			
+			blockData = null;
+			e.printStackTrace();
 		}
 	}
 	
@@ -68,6 +78,43 @@ public enum Block {
 	static {
 		for(Block b : EnumSet.allOf(Block.class)) {
 			blocks.put(b.id, b);
+		}
+	}
+	
+	public static class BlockData {
+		private String name;
+		private boolean isOpaque;
+		private Vector2i topTextureCoords;
+		private Vector2i sideTextureCoords;
+		private Vector2i bottomTextureCoords;
+		
+		public BlockData(String name, boolean isOpaque, Vector2i topTextureCoords, Vector2i sideTextureCoords,
+				Vector2i bottomTextureCoords) {
+			this.name = name;
+			this.isOpaque = isOpaque;
+			this.topTextureCoords = topTextureCoords;
+			this.sideTextureCoords = sideTextureCoords;
+			this.bottomTextureCoords = bottomTextureCoords;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public boolean isOpaque() {
+			return isOpaque;
+		}
+		
+		public Vector2i getTopTextureCoords() {
+			return topTextureCoords;
+		}
+		
+		public Vector2i getSideTextureCoords() {
+			return sideTextureCoords;
+		}
+		
+		public Vector2i getBottomTextureCoords() {
+			return bottomTextureCoords;
 		}
 	}
 }
