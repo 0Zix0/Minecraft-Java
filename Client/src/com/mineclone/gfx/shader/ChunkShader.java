@@ -1,18 +1,18 @@
 package com.mineclone.gfx.shader;
 
-import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 import org.joml.Matrix4f;
 
-public class SimpleShader extends ShaderProgram {
-
+public class ChunkShader extends ShaderProgram {
+	
 	private int locationTime;
 	private int locationViewMatrix;
 	private int locationModelMatrix;
 	private int locationProjMatrix;
 	
-	public SimpleShader() {
-		super("res/shaders/simple.vert", "res/shaders/simple.frag");
+	public ChunkShader() {
+		super("res/shaders/chunk.vert", "res/shaders/chunk.frag");
 		getUniformLocations();
 	}
 

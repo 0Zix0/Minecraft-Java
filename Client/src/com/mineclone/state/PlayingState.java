@@ -1,12 +1,9 @@
 package com.mineclone.state;
 
-import org.lwjgl.glfw.GLFW;
-
 import com.mineclone.Application;
 import com.mineclone.entity.Quad;
 import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.renderer.MasterRenderer;
-import com.mineclone.gfx.texture.BasicTexture;
 import com.mineclone.gfx.texture.TextureAtlas;
 
 public class PlayingState extends GameState {

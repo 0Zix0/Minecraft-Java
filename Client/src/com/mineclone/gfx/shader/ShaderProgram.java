@@ -1,6 +1,5 @@
 package com.mineclone.gfx.shader;
 
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
 import java.nio.FloatBuffer;
@@ -8,8 +7,6 @@ import java.nio.FloatBuffer;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
-
-import com.mineclone.util.BufferUtilities;
 
 public abstract class ShaderProgram {
 

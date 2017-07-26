@@ -2,8 +2,6 @@ package com.mineclone.gfx.texture;
 
 import java.util.ArrayList;
 
-import org.joml.Vector2i;
-
 public class TextureAtlas extends BasicTexture {
 	
 	private int textureSize;

@@ -1,7 +1,6 @@
 package com.mineclone.state;
 
 import com.mineclone.Application;
-import com.mineclone.entity.Entity;
 import com.mineclone.gfx.Camera;
 import com.mineclone.gfx.renderer.MasterRenderer;
 
